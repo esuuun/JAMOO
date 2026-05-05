@@ -99,6 +99,8 @@ export interface FaceRecommendRequest {
   confidence_score: number
   customer_name: string
   sweetness_level: SweetnessLevel
+  age?: number
+  gender?: string
 }
 
 export interface CreateOrderRequest {

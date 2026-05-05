@@ -6,6 +6,9 @@ export interface EmotionResult {
   dominantEmotion: string
   confidenceScore: number
   allExpressions: Record<string, number>
+  age: number
+  gender: string
+  genderProbability: number
 }
 
 interface UseFaceDetectionReturn {
@@ -36,6 +39,7 @@ export function useFaceDetection(): UseFaceDetectionReturn {
         await Promise.all([
           faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
           faceapi.nets.faceExpressionNet.loadFromUri('/models'),
+          faceapi.nets.ageGenderNet.loadFromUri('/models'),
         ])
         setModelsLoaded(true)
       } catch (err) {
@@ -97,6 +101,7 @@ export function useFaceDetection(): UseFaceDetectionReturn {
           new faceapi.TinyFaceDetectorOptions()
         )
         .withFaceExpressions()
+        .withAgeAndGender()
 
       if (!detection) {
         setError('Wajah tidak terdeteksi. Pastikan wajah terlihat jelas dan ruangan cukup terang.')
@@ -105,7 +110,6 @@ export function useFaceDetection(): UseFaceDetectionReturn {
 
       const expressions = detection.expressions as Record<string, number>
 
-      // Ambil dominant emotion
       const [dominantEmotion, confidenceScore] = Object.entries(expressions)
         .sort(([, a], [, b]) => b - a)[0]
 
@@ -113,6 +117,9 @@ export function useFaceDetection(): UseFaceDetectionReturn {
         dominantEmotion,
         confidenceScore,
         allExpressions: expressions,
+        age:               Math.round(detection.age),
+        gender:            detection.gender,
+        genderProbability: detection.genderProbability,
       }
     } catch (err) {
       console.error('[useFaceDetection] Scan error:', err)

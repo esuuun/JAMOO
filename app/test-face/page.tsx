@@ -28,7 +28,7 @@ export default function TestFacePage() {
       const emotion = await scanEmotion()
       if (!emotion) { setStatus('Wajah tidak terdeteksi, coba lagi.'); setLoading(false); return }
 
-      setStatus(`Detected: ${emotion.dominantEmotion} (${(emotion.confidenceScore * 100).toFixed(0)}%) — membuat session...`)
+      setStatus(`Detected: ${emotion.dominantEmotion} (${(emotion.confidenceScore * 100).toFixed(0)}%) | ~${emotion.age}yo ${emotion.gender} — membuat session...`)
 
       // ── 2. Buat session ──────────────────────────────────────
       const sessionRes = await fetch('/api/sessions', {
@@ -51,6 +51,8 @@ export default function TestFacePage() {
           confidence_score: emotion.confidenceScore,
           customer_name:    customerName,
           sweetness_level:  sweetness,
+          age:              emotion.age,
+          gender:           emotion.gender,
         }),
       })
       const { recipe: result, error: apiErr } = await recipeRes.json()
@@ -70,7 +72,7 @@ export default function TestFacePage() {
       <h1 className="text-2xl font-bold">🧪 Test Face Scan Flow</h1>
 
       {/* ── Inputs ── */}
-      <div className="flex gap-4">
+      <div className="flex flex-wrap gap-3 justify-center">
         <input
           className="bg-gray-800 rounded px-3 py-2 text-sm"
           placeholder="Nama kamu"

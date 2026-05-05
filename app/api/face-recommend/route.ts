@@ -17,6 +17,8 @@ export async function POST(req: NextRequest) {
       confidence_score,
       customer_name,
       sweetness_level,
+      age,
+      gender,
     }: FaceRecommendRequest = await req.json()
 
     // ── Step 1: Ambil semua secret persona dari Supabase ─────────
@@ -51,6 +53,8 @@ Data ekspresi user dari face scan:
 - Confidence score: ${confidence_score ? (confidence_score * 100).toFixed(0) + '%' : 'tidak tersedia'}
 - Nama: ${customer_name}
 - Preferensi gula: ${sweetness_level}
+${age ? `- Usia: ${age} tahun` : ''}
+${gender ? `- Gender: ${gender}` : ''}
 
 Library persona (pilih SALAH SATU yang paling cocok):
 ${personaLibrary}
