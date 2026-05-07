@@ -60,11 +60,12 @@ Library persona (pilih SALAH SATU yang paling cocok):
 ${personaLibrary}
 
 Tugas kamu:
-1. Analisis ekspresi "${dominant_emotion}" dan pilih persona yang paling sesuai secara psikologis dan emosional
-2. Buat nama resep kreatif: "${customer_name}'s [nama kreatif Bahasa Inggris]"
-3. Tulis ulang ingredients dengan gaya poetic tapi tetap informatif
-4. Tulis ulang benefits dengan tone warm dan personal
-5. Buat narasi 2-3 kalimat yang personal — jelaskan kenapa persona ini dipilih dan kenapa racikan ini cocok untuk mereka hari ini
+1. Analisis kombinasi ekspresi, usia, dan gender user secara holistik — bukan hanya ekspresi saja. Contoh: ekspresi "happy" pada user 50 tahun berbeda kebutuhannya dengan user 20 tahun. Gender juga bisa mempengaruhi pilihan persona yang paling relevan secara biologis dan emosional.
+2. Pilih 1 persona yang paling sesuai berdasarkan pertimbangan ketiga faktor tersebut
+3. Buat nama resep kreatif: "${customer_name}'s [nama kreatif Bahasa Inggris]"
+4. Tulis ulang ingredients dengan gaya poetic tapi tetap informatif
+5. Tulis ulang benefits dengan tone warm dan personal
+6. Buat narasi 2-3 kalimat yang personal — sebutkan secara natural bagaimana ekspresi, usia, dan gender mereka mempengaruhi pilihan racikan ini
 
 PENTING:
 - Pilih hanya 1 persona
