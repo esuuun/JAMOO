@@ -1,6 +1,6 @@
 // ── Database types ─────────────────────────────────────────
 
-export type MenuCategory = 'signature' | 'classic' | 'secret'
+export type MenuCategory = 'signature' | 'classic' | 'heritage' | 'secret'
 export type SweetnessLevel = 'normal' | 'less' | 'no_sugar'
 export type OrderStatus = 'pending' | 'processing' | 'done' | 'cancelled'
 export type SessionStatus = 'active' | 'completed' | 'abandoned'
@@ -23,6 +23,8 @@ export interface Menu {
   secret_persona_name: string | null
   secret_base_ingredients: string | null
   secret_base_benefits: string | null
+  cogs: number | null
+  heritage_region: string | null
   created_at: string
 }
 
@@ -81,10 +83,13 @@ export interface RecommendationResponse {
 export interface SecretRecipeResponse {
   persona: string
   recipe_name: string
+  menu_name: string
   ingredients: string
   benefits: string
   narasi: string
   menu_id: string
+  price: number
+  image_url: string | null
 }
 
 // ── API Request/Response types ─────────────────────────────
