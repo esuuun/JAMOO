@@ -1,31 +1,29 @@
 @import "tailwindcss";
 
-/* ── Articulat CF ──────────────────────────────────────────── */
-@font-face { font-family: 'Articulat CF'; src: url('/fonts/Articulat CF v3.2 OTF/ArticulatCF-Thin.otf');         font-weight: 100; font-style: normal; }
-@font-face { font-family: 'Articulat CF'; src: url('/fonts/Articulat CF v3.2 OTF/ArticulatCF-ThinOblique.otf');  font-weight: 100; font-style: oblique; }
-@font-face { font-family: 'Articulat CF'; src: url('/fonts/Articulat CF v3.2 OTF/ArticulatCF-ExtraLight.otf');   font-weight: 200; font-style: normal; }
-@font-face { font-family: 'Articulat CF'; src: url('/fonts/Articulat CF v3.2 OTF/ArticulatCF-ExtraLightOblique.otf'); font-weight: 200; font-style: oblique; }
-@font-face { font-family: 'Articulat CF'; src: url('/fonts/Articulat CF v3.2 OTF/ArticulatCF-Light.otf');        font-weight: 300; font-style: normal; }
-@font-face { font-family: 'Articulat CF'; src: url('/fonts/Articulat CF v3.2 OTF/ArticulatCF-LightOblique.otf'); font-weight: 300; font-style: oblique; }
-@font-face { font-family: 'Articulat CF'; src: url('/fonts/Articulat CF v3.2 OTF/ArticulatCF-Regular.otf');      font-weight: 400; font-style: normal; }
-@font-face { font-family: 'Articulat CF'; src: url('/fonts/Articulat CF v3.2 OTF/ArticulatCF-RegularOblique.otf'); font-weight: 400; font-style: oblique; }
-@font-face { font-family: 'Articulat CF'; src: url('/fonts/Articulat CF v3.2 OTF/ArticulatCF-Normal.otf');       font-weight: 450; font-style: normal; }
-@font-face { font-family: 'Articulat CF'; src: url('/fonts/Articulat CF v3.2 OTF/ArticulatCF-NormalOblique.otf'); font-weight: 450; font-style: oblique; }
-@font-face { font-family: 'Articulat CF'; src: url('/fonts/Articulat CF v3.2 OTF/ArticulatCF-Medium.otf');       font-weight: 500; font-style: normal; }
-@font-face { font-family: 'Articulat CF'; src: url('/fonts/Articulat CF v3.2 OTF/ArticulatCF-MediumOblique.otf'); font-weight: 500; font-style: oblique; }
-@font-face { font-family: 'Articulat CF'; src: url('/fonts/Articulat CF v3.2 OTF/ArticulatCF-DemiBold.otf');     font-weight: 600; font-style: normal; }
-@font-face { font-family: 'Articulat CF'; src: url('/fonts/Articulat CF v3.2 OTF/ArticulatCF-DemiBoldOblique.otf'); font-weight: 600; font-style: oblique; }
-@font-face { font-family: 'Articulat CF'; src: url('/fonts/Articulat CF v3.2 OTF/ArticulatCF-Bold.otf');         font-weight: 700; font-style: normal; }
-@font-face { font-family: 'Articulat CF'; src: url('/fonts/Articulat CF v3.2 OTF/ArticulatCF-BoldOblique.otf');  font-weight: 700; font-style: oblique; }
-@font-face { font-family: 'Articulat CF'; src: url('/fonts/Articulat CF v3.2 OTF/ArticulatCF-ExtraBold.otf');    font-weight: 800; font-style: normal; }
-@font-face { font-family: 'Articulat CF'; src: url('/fonts/Articulat CF v3.2 OTF/ArticulatCF-ExtraBoldOblique.otf'); font-weight: 800; font-style: oblique; }
-@font-face { font-family: 'Articulat CF'; src: url('/fonts/Articulat CF v3.2 OTF/ArticulatCF-Heavy.otf');        font-weight: 900; font-style: normal; }
-@font-face { font-family: 'Articulat CF'; src: url('/fonts/Articulat CF v3.2 OTF/ArticulatCF-HeavyOblique.otf'); font-weight: 900; font-style: oblique; }
+@theme {
+  --color-jamoo-brown: #523921;
+  --color-jamoo-green: #496f18;
+  --color-jamoo-green-dark: #3a5912;
+  --color-jamoo-cream: #f8fddd;
+  --color-jamoo-orange: #e88133;
+}
 
-@theme inline {
-  --font-sans: 'Articulat CF', sans-serif;
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --jamoo-blue-overlay: rgba(130, 161, 188, 0.2);
+  --jamoo-shadow: rgba(130, 161, 188, 0.25);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
 }
 
 body {
-  font-family: 'Articulat CF', sans-serif;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "Articulat CF", "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
 }

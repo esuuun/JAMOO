@@ -45,7 +45,7 @@ export default function Home() {
         ">
 
           {/* ORDER Button */}
-          <Link href="/menu" className="flex-1 max-w-[140px] md:max-w-[220px] lg:max-w-[300px]">
+          <Link href="/manual-order/signature" className="flex-1 max-w-[140px] md:max-w-[220px] lg:max-w-[300px]">
             <button
               className="
                 w-full aspect-square
