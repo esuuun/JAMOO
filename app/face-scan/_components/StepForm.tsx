@@ -55,6 +55,25 @@ export default function StepForm({ data, onChange, onNext }: Props) {
       {/* ── Right: form card ── */}
       <div className="flex-1 bg-white rounded-t-3xl lg:rounded-none lg:rounded-l-3xl px-6 pt-8 pb-10 flex flex-col gap-6 lg:px-14 lg:py-16 lg:justify-center lg:shadow-2xl">
 
+          {/* Back button */}
+          <button
+            onClick={() => window.history.back()}
+            className="
+              self-start flex items-center gap-1.5
+              text-[#4A5820] font-bold text-sm
+              bg-[#EAE8D8]
+              rounded-full px-4 py-2
+              hover:bg-[#DDD9C8]
+              active:scale-95
+              transition-all duration-200
+            "
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path d="M15 18l-6-6 6-6" stroke="#4A5820" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            Back
+          </button>
+          
         {/* Name */}
         <div className="flex flex-col gap-2">
           <label className="text-center font-semibold text-[#2D1A10] lg:text-left lg:text-base">
