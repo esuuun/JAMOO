@@ -116,6 +116,30 @@ export function MenuDetailModal({ item, editing, onClose }: Props) {
               aria-modal="true"
               aria-labelledby="modal-title"
             >
+              {/* Close (X) button */}
+              <button
+                type="button"
+                onClick={onClose}
+                className="absolute top-3 right-3 z-20 w-8 h-8 flex items-center justify-center rounded-full bg-white/95 hover:bg-[#f8fddd] transition shadow-[0_2px_6px_rgba(0,0,0,0.15)]"
+                aria-label="Close"
+                title="Close"
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#523921"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden
+                >
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              </button>
+
               {/* Scrollable upper section */}
               <div className="flex-1 overflow-y-auto">
                 {/* Cup image */}
