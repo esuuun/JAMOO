@@ -1,15 +1,18 @@
 @import "tailwindcss";
 
+@theme {
+  --color-jamoo-brown: #523921;
+  --color-jamoo-green: #496f18;
+  --color-jamoo-green-dark: #3a5912;
+  --color-jamoo-cream: #f8fddd;
+  --color-jamoo-orange: #e88133;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --jamoo-blue-overlay: rgba(130, 161, 188, 0.2);
+  --jamoo-shadow: rgba(130, 161, 188, 0.25);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,5 +25,5 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Articulat CF", "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
 }
