@@ -11,7 +11,7 @@ type Props = {
 
 export function MenuCard({ item, onClick, onQuickAdd }: Props) {
   const displayPrice = item.price.large;
-  const useDefault = true;
+  const useDefault = !item.image;
 
   return (
     <button
