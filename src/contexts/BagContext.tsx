@@ -9,6 +9,7 @@ export type BagItem = {
   id: string;
   menuId: string;
   name: string;
+  shortDescription: string;
   size: Size;
   sweetness: Sweetness;
   quantity: number;

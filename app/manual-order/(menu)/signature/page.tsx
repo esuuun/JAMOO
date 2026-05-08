@@ -1,9 +1,9 @@
 import { CategoryBanner } from '@/src/components/manual-order/CategoryBanner';
 import { MenuGrid } from '@/src/components/manual-order/MenuGrid';
-import { menuByCategory } from '@/src/data/menuData';
+import { fetchMenusByCategory } from '@/lib/fetchMenus';
 
-export default function SignaturePage() {
-  const items = menuByCategory('signature');
+export default async function SignaturePage() {
+  const items = await fetchMenusByCategory('signature');
 
   return (
     <>

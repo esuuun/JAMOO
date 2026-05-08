@@ -24,7 +24,6 @@ export default function OrderDetailsPage() {
   const { items, subtotal, clear } = useBag();
   const router = useRouter();
 
-  // Snapshot order data on first mount so it stays stable even after bag clear
   const [snapshot, setSnapshot] = useState<{
     items: typeof items;
     total: number;
@@ -48,33 +47,22 @@ export default function OrderDetailsPage() {
 
   const view = useMemo(() => snapshot, [snapshot]);
 
-  if (!view) {
-    return <main className="min-h-screen bg-[#f8fddd]" />;
-  }
+  if (!view) return <main className="min-h-screen bg-[#f8fddd]" />;
 
   function handleBackToHome() {
+    sessionStorage.removeItem('jamoo_last_qr');
     clear();
     router.push('/');
   }
 
   return (
     <main className="relative min-h-screen bg-[#f8fddd] overflow-hidden flex flex-col">
-      {/* Noise overlay */}
       <div className="pointer-events-none absolute inset-0 z-0 opacity-20 mix-blend-multiply">
-        <Image
-          src="/manual-order/noise.png"
-          alt=""
-          fill
-          sizes="100vw"
-          className="object-cover"
-          aria-hidden
-        />
+        <Image src="/manual-order/noise.png" alt="" fill sizes="100vw" className="object-cover" aria-hidden />
       </div>
 
-      {/* Landscape illustration overlay */}
       <LandscapeBackdrop />
 
-      {/* Top: status card */}
       <div className="relative z-10 px-4 pt-8 flex justify-center">
         <div className="w-full max-w-[657px]">
           <OrderStatusCard
@@ -85,10 +73,8 @@ export default function OrderDetailsPage() {
         </div>
       </div>
 
-      {/* Spacer */}
       <div className="flex-1" />
 
-      {/* Bottom: white panel with recap + button */}
       <div className="relative z-10 mt-6 mx-auto w-full max-w-[657px] bg-white rounded-t-[30px] shadow-[0_-4px_10px_rgba(130,161,188,0.25)] px-5 md:px-8 pt-7 pb-6 flex flex-col gap-5">
         <OrderRecapCard items={view.items} total={view.total} />
 
@@ -103,4 +89,3 @@ export default function OrderDetailsPage() {
     </main>
   );
 }
-

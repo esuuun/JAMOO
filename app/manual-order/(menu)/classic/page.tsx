@@ -1,9 +1,9 @@
 import { CategoryBanner } from '@/src/components/manual-order/CategoryBanner';
 import { MenuGrid } from '@/src/components/manual-order/MenuGrid';
-import { menuByCategory } from '@/src/data/menuData';
+import { fetchMenusByCategory } from '@/lib/fetchMenus';
 
-export default function ClassicPage() {
-  const items = menuByCategory('classic');
+export default async function ClassicPage() {
+  const items = await fetchMenusByCategory('classic');
 
   return (
     <>

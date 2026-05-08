@@ -1,9 +1,9 @@
 import { CategoryBanner } from '@/src/components/manual-order/CategoryBanner';
 import { MenuGrid } from '@/src/components/manual-order/MenuGrid';
-import { menuByCategory } from '@/src/data/menuData';
+import { fetchMenusByCategory } from '@/lib/fetchMenus';
 
-export default function HeritagePage() {
-  const items = menuByCategory('heritage');
+export default async function HeritagePage() {
+  const items = await fetchMenusByCategory('heritage');
 
   return (
     <>

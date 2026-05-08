@@ -18,6 +18,7 @@ export function MenuGrid({ items }: Props) {
     addItem({
       menuId: item.id,
       name: item.name,
+      shortDescription: item.shortDescription,
       size: 'REGULAR',
       sweetness: 'NORMAL',
       quantity: 1,

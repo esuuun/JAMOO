@@ -67,6 +67,7 @@ export function MenuDetailModal({ item, editing, onClose }: Props) {
     addItem({
       menuId: item.id,
       name: item.name,
+      shortDescription: item.shortDescription,
       size,
       sweetness,
       quantity,

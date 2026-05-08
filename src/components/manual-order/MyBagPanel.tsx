@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import { BagItem, useBag } from '@/src/contexts/BagContext';
-import { findMenu, formatIDR, MenuItem } from '@/src/data/menuData';
+import { formatIDR, MenuItem } from '@/src/data/menuData';
 import { EditingPayload, MenuDetailModal } from './MenuDetailModal';
 
 export function MyBagPanel() {
@@ -30,8 +30,17 @@ export function MyBagPanel() {
   } | null>(null);
 
   function handleEdit(item: BagItem) {
-    const menu = findMenu(item.menuId);
-    if (!menu) return;
+    const menu: MenuItem = {
+      id: item.menuId,
+      name: item.name,
+      shortDescription: item.shortDescription,
+      fullDescription: item.shortDescription,
+      price: { regular: item.unitPrice, large: item.unitPrice },
+      image: item.imageUrl,
+      ingredients: [],
+      benefits: [],
+      category: '',
+    };
     setEditing({
       menu,
       payload: {
@@ -164,7 +173,6 @@ function BagItemRow({
   onEdit: () => void;
   onRemove: () => void;
 }) {
-  const menu = findMenu(item.menuId);
   return (
     <li className="flex items-start gap-2 py-1">
       {/* Drink thumb */}
@@ -195,7 +203,7 @@ function BagItemRow({
           {item.quantity > 1 ? ` · x${item.quantity}` : ''}
         </p>
         <p className="text-[10px] text-[#293845] leading-tight truncate">
-          {menu?.shortDescription ?? ''}
+          {item.shortDescription}
         </p>
         <p className="text-[12px] font-semibold text-[#293845] leading-tight mt-0.5">
           {formatIDR(item.unitPrice * item.quantity)}
