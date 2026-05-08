@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import type { SecretRecipeResponse } from "@/lib/types";
 import type { FaceScanData } from "../page";
 
@@ -24,68 +25,28 @@ export default function StepResult({
   basePrice,
   onCancel,
 }: Props) {
+  const router = useRouter();
   const [qty, setQty] = useState(1);
   const [ordering, setOrdering] = useState(false);
-  const [ordered, setOrdered] = useState(false);
-  const [qrCode, setQrCode] = useState<string | null>(null);
 
   const sizeExtra = formData.size === "large" ? 10000 : 0;
   const unitPrice = basePrice + sizeExtra;
   const totalPrice = unitPrice * qty;
 
-  async function handleOrder() {
+  function handleOrder() {
     setOrdering(true);
-    try {
-      const res = await fetch("/api/orders", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          session_id: sessionId,
-          menu_id: recipe.menu_id,
-          sweetness_level: formData.sweetnessLevel,
-          unit_price: unitPrice,
-        }),
-      });
-      const { order } = await res.json();
-      setQrCode(order?.qr_code ?? null);
-      setOrdered(true);
-    } catch {
-      // allow retry
-    } finally {
-      setOrdering(false);
-    }
-  }
-
-  if (ordered) {
-    return (
-      <div className="w-full min-h-screen bg-[#EDEBD2] flex items-center justify-center px-6">
-        <div className="bg-white rounded-3xl px-8 py-12 w-full max-w-md flex flex-col items-center gap-5 shadow-xl">
-          <span className="text-6xl">🎉</span>
-          <h2 className="text-2xl font-black text-[#523921] text-center">
-            Order Placed!
-          </h2>
-          <p className="text-[#523921] text-sm text-center">
-            {recipe.recipe_name}
-          </p>
-          {qrCode && (
-            <div className="bg-[#EAE8D8] rounded-2xl px-8 py-4 w-full text-center">
-              <p className="text-xs text-[#9C9070] mb-1">
-                Show this code to the machine
-              </p>
-              <p className="text-2xl font-black text-[#523921] tracking-widest">
-                {qrCode}
-              </p>
-            </div>
-          )}
-          <button
-            onClick={onCancel}
-            className="text-sm text-[#4A5820] font-semibold underline underline-offset-2"
-          >
-            Back to start
-          </button>
-        </div>
-      </div>
+    sessionStorage.setItem(
+      "jamoo_face_order",
+      JSON.stringify({
+        sessionId,
+        recipe,
+        formData,
+        qty,
+        unitPrice,
+        totalPrice,
+      })
     );
+    router.push("/face-scan/order-summary");
   }
 
   return (
