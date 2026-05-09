@@ -67,7 +67,7 @@ export default function Home() {
               />
               <span
                 className="text-sm md:text-lg lg:text-xl font-black tracking-widest"
-                style={{ fontFamily: "'Articulat CF', serif", color: '#444444' }}
+                style={{ color: '#444444' }}
               >
                 ORDER
               </span>
@@ -97,7 +97,7 @@ export default function Home() {
               />
               <span
                 className="text-sm md:text-lg lg:text-xl font-black tracking-widest"
-                style={{ fontFamily: "'Articulat CF', serif", color: '#444444' }}
+                style={{ color: '#444444' }}
               >
                 PERSONALIZE
               </span>
