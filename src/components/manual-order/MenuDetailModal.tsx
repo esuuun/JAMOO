@@ -154,7 +154,7 @@ export function MenuDetailModal({ item, editing, onClose }: Props) {
                       aria-hidden
                     />
                     <Image
-                      src="/manual-order/drink-default-cup.png"
+                      src={item.image}
                       alt={item.name}
                       fill
                       className="object-contain p-3"
