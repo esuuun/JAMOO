@@ -28,6 +28,21 @@ export default function StepResult({
   const router = useRouter();
   const [qty, setQty] = useState(1);
   const [ordering, setOrdering] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  async function handleShare() {
+    const shareUrl = `${window.location.origin}/result/${sessionId}`;
+    const text = `🌿 My JAMOO Recipe: ${recipe.recipe_name}\n\nPersona: ${recipe.persona}\n\n${recipe.narasi}\n\nIngredients: ${recipe.ingredients}\n\nBenefits: ${recipe.benefits}`;
+    const shareData = { title: `JAMOO — ${recipe.recipe_name}`, text, url: shareUrl };
+
+    if (navigator.share && navigator.canShare?.(shareData)) {
+      try { await navigator.share(shareData); } catch { /* user cancelled */ }
+    } else {
+      await navigator.clipboard.writeText(`${text}\n\n${shareUrl}`);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  }
 
   const sizeExtra = formData.size === "large" ? 10000 : 0;
   const unitPrice = basePrice + sizeExtra;
@@ -155,8 +170,11 @@ export default function StepResult({
               </p>
             </div>
 
-            <button className="w-full bg-[#EDEBD2] text-[#523921] font-bold py-3 rounded-2xl text-sm tracking-widest hover:bg-[#E0DEC5] transition-colors">
-              Share
+            <button
+              onClick={handleShare}
+              className="w-full bg-[#EDEBD2] text-[#523921] font-bold py-3 rounded-2xl text-sm tracking-widest hover:bg-[#E0DEC5] transition-colors"
+            >
+              {copied ? "Copied!" : "Share"}
             </button>
           </div>
 

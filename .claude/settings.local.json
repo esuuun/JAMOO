@@ -2,7 +2,11 @@
   "permissions": {
     "allow": [
       "mcp__plugin_figma_figma__get_screenshot",
-      "mcp__plugin_figma_figma__get_design_context"
+      "mcp__plugin_figma_figma__get_design_context",
+      "Bash(mkdir -p /Users/ikhsan.kurniawan/JAMOO/app/result/\\\\[id\\\\])"
+    ],
+    "additionalDirectories": [
+      "/Users/ikhsan.kurniawan/JAMOO/app/result"
     ]
   }
 }
