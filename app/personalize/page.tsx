@@ -55,7 +55,7 @@ export default function PersonalizePage() {
         {/* Back button */}
         <div className="w-full flex items-start mb-8 md:mb-10">
           <button
-            onClick={() => router.back()}
+            onClick={() => router.push('/')}
             className="
               flex items-center gap-1.5
               text-[#4A5820] font-bold text-sm
