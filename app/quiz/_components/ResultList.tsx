@@ -30,5 +30,3 @@ export default function ResultList({ results, selectedMenuId, onSelect }: Props)
     </div>
   )
 }
-  )
-}
