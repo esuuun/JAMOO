@@ -17,7 +17,7 @@ export function MenuCard({ item, onClick, onQuickAdd }: Props) {
     <button
       type="button"
       onClick={onClick}
-      className="group bg-white rounded-[20px] shadow-[0_0_10px_rgba(0,0,0,0.25)] w-full max-w-[253px] aspect-[253/316] p-4 sm:p-5 flex flex-col text-left transition-transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-[#496f18]"
+      className="group bg-white rounded-[20px] shadow-[0_0_10px_rgba(0,0,0,0.25)] w-full max-w-[320px] sm:max-w-[253px] aspect-[253/316] p-4 sm:p-5 flex flex-col text-left transition-transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-[#496f18]"
     >
       {/* Drink illustration */}
       <div className="flex-1 flex items-center justify-center min-h-0">
