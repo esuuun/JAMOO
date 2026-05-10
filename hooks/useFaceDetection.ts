@@ -12,7 +12,7 @@ export interface EmotionResult {
 }
 
 interface UseFaceDetectionReturn {
-  videoRef: React.RefObject<HTMLVideoElement>
+  videoRef: React.RefObject<HTMLVideoElement | null>
   modelsLoaded: boolean
   cameraActive: boolean
   isScanning: boolean
