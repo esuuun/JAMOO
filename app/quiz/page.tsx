@@ -26,6 +26,24 @@ export default function QuizPage() {
   const [selectedMenuId, setSelectedMenuId] = useState<string | null>(null)
 
   useEffect(() => {
+    const restore = sessionStorage.getItem('jamoo_quiz_restore')
+    if (restore) {
+      sessionStorage.removeItem('jamoo_quiz_restore')
+      const saved = sessionStorage.getItem('jamoo_quiz_state')
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved)
+          if (parsed.sessionId) {
+            setFormData(parsed.formData)
+            setResults(parsed.results)
+            setStep(parsed.step)
+            setSessionId(parsed.sessionId)
+            return
+          }
+        } catch (e) {}
+      }
+    }
+
     async function init() {
       try {
         const res = await fetch('/api/sessions', {
@@ -43,6 +61,12 @@ export default function QuizPage() {
     }
     init()
   }, [])
+
+  useEffect(() => {
+    if (sessionId) {
+      sessionStorage.setItem('jamoo_quiz_state', JSON.stringify({ formData, results, step, sessionId }))
+    }
+  }, [formData, results, step, sessionId])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -97,11 +121,35 @@ export default function QuizPage() {
       sweetnessBag: swMap[formData.sweetness] || 'NORMAL',
       unitPrice: selectedItem.price ?? 0,
       imageUrl: selectedItem.image_url ?? '',
+      description: selectedItem.description ?? '',
     }
 
     sessionStorage.setItem('jamoo_quiz_order', JSON.stringify(orderData))
     router.push('/quiz/menu-detail')
   }
+
+  const handleBack = () => {
+    if (results) {
+      router.push('/personalize');
+      return;
+    }
+
+    switch (step) {
+      case 'chooseNeeds':
+        setStep('pickMood');
+        break;
+      case 'sweetness':
+        setStep('chooseNeeds');
+        break;
+      case 'medicalInfo':
+        setStep('sweetness');
+        break;
+      case 'pickMood':
+      default:
+        router.push('/personalize');
+        break;
+    }
+  };
 
   return (
     <div
@@ -114,7 +162,7 @@ export default function QuizPage() {
     >
       <div className="w-full max-w-md mt-6 flex-1 flex flex-col pb-0">
         <button
-          onClick={() => router.back()}
+          onClick={handleBack}
           className="mb-1 w-fit"
           aria-label="Go back"
         >

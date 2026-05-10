@@ -48,14 +48,14 @@ export default function QuizOrderDetailsPage() {
       shortDescription: '',
       size: data.size || 'REGULAR',
       sweetness: data.sweetnessBag as any,
-      quantity: 1,
+      quantity: data.quantity || 1,
       unitPrice: data.unitPrice,
       imageUrl: data.imageUrl,
     };
 
     setSnapshot({
       items: [dummyItem],
-      total: data.unitPrice,
+      total: data.totalPrice || data.unitPrice,
       pickupNumber: generatePickupNumber(),
       estimatedTime: generateEstimatedTime(5),
     });
