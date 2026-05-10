@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { Header } from '@/src/components/manual-order/Header';
 import { Sidebar } from '@/src/components/manual-order/Sidebar';
 import { MyBagPanel } from '@/src/components/manual-order/MyBagPanel';
@@ -20,6 +21,18 @@ export default function MenuLayout({ children }: { children: React.ReactNode }) 
 
       {/* Page content */}
       <div className="relative z-10 flex flex-1 flex-col px-3 sm:px-4 md:px-8 lg:px-12 pt-4 md:pt-6 pb-6 gap-4 md:gap-6">
+        {/* Back button */}
+        <div className="self-start -mb-2">
+          <Link href="/">
+            <button
+              className="w-10 h-10 flex items-center justify-center rounded-full bg-white/60 hover:bg-white transition shadow-sm backdrop-blur-md"
+              aria-label="Back"
+            >
+              <img src="/quiz/ArrowBrown.svg" alt="Back" className="w-6 h-6" />
+            </button>
+          </Link>
+        </div>
+        
         <Header />
 
         <div className="flex flex-col md:flex-row flex-1 gap-3 md:gap-2">

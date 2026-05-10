@@ -101,8 +101,19 @@ export default function OrderSummaryPage() {
         </div>
 
         <LandscapeBackdrop />
-
+        
         <div className="relative z-10 w-full max-w-[657px] flex flex-col items-stretch gap-3">
+          {/* Back button */}
+          <div className="self-start">
+            <button
+              onClick={() => router.back()}
+              className="w-10 h-10 flex items-center justify-center rounded-full bg-white/60 hover:bg-white transition shadow-sm backdrop-blur-md"
+              aria-label="Back"
+            >
+              <img src="/quiz/ArrowBrown.svg" alt="Back" className="w-6 h-6" />
+            </button>
+          </div>
+
           <div className="bg-white rounded-[20px] shadow-[0_0_10px_rgba(0,0,0,0.25)] p-6 md:p-7 flex flex-col gap-4">
             <OrderHeader />
 
