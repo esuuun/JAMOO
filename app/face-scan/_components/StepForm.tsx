@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import type { SweetnessLevel } from '@/lib/types'
 import type { FaceScanData } from '../page'
 
@@ -22,6 +23,7 @@ const SIZES: { value: 'regular' | 'large'; label: string; note: string }[] = [
 ]
 
 export default function StepForm({ data, onChange, onNext }: Props) {
+  const router = useRouter()
   const canSubmit = data.customerName.trim().length > 0
 
   return (
@@ -29,6 +31,16 @@ export default function StepForm({ data, onChange, onNext }: Props) {
 
       {/* ── Left: hero panel ── */}
       <div className="relative flex flex-col px-6 pt-10 pb-6 lg:w-[45%] lg:min-h-screen lg:justify-center lg:px-14 lg:pt-0">
+        {/* Back button — top left */}
+        <button
+          onClick={() => router.back()}
+          className="absolute top-4 left-4 lg:top-8 lg:left-10 flex items-center gap-1.5 text-sm font-semibold text-[#2D1A10] hover:opacity-70 transition-opacity"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M15 18l-6-6 6-6" stroke="#2D1A10" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          Back
+        </button>
         <h1 className="text-4xl lg:text-6xl font-black text-[#2D1A10] leading-none">DISCOVER</h1>
         <p className="text-lg lg:text-2xl font-semibold text-[#2D1A10] mt-1">Your Secret Recipe!</p>
 
