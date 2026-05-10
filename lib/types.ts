@@ -74,6 +74,9 @@ export interface RecommendationItem {
   menu_id: string
   menu_name: string
   reason: string
+  description?: string | null
+  image_url?: string | null
+  price?: number
 }
 
 export interface RecommendationResponse {
