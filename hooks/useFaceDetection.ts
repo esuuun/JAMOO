@@ -12,7 +12,7 @@ export interface EmotionResult {
 }
 
 interface UseFaceDetectionReturn {
-  videoRef: React.RefObject<HTMLVideoElement>
+  videoRef: React.RefObject<HTMLVideoElement | null>
   modelsLoaded: boolean
   cameraActive: boolean
   isScanning: boolean
@@ -108,7 +108,7 @@ export function useFaceDetection(): UseFaceDetectionReturn {
         return null
       }
 
-      const expressions = detection.expressions as Record<string, number>
+      const expressions = detection.expressions as unknown as Record<string, number>
 
       const [dominantEmotion, confidenceScore] = Object.entries(expressions)
         .sort(([, a], [, b]) => b - a)[0]
