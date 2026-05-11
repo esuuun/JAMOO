@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import { MenuItem, formatIDR } from '@/src/data/menuData';
+import Image from "next/image";
+import { MenuItem, formatIDR } from "@/src/data/menuData";
 
 type Props = {
   item: MenuItem;
@@ -32,7 +32,7 @@ export function MenuCard({ item, onClick, onQuickAdd }: Props) {
                 aria-hidden
               />
               <Image
-                src="/manual-order/drink-default-cup.png"
+                src={item.image}
                 alt={item.name}
                 fill
                 className="object-contain p-3"
