@@ -22,7 +22,10 @@ interface QuizOrderData {
   sweetnessRaw: SweetnessLevel;
   sweetnessBag: string;
   unitPrice: number;
+  totalPrice: number;
+  quantity: number;
   imageUrl: string;
+  size: 'REGULAR' | 'LARGE';
 }
 
 export default function QuizOrderSummaryPage() {
@@ -52,14 +55,14 @@ export default function QuizOrderSummaryPage() {
       menuId: data.menuId,
       name: data.name,
       shortDescription: '',
-      size: (data as any).size || 'REGULAR',
+      size: data.size || 'REGULAR',
       sweetness: data.sweetnessBag as any,
-      quantity: 1,
+      quantity: data.quantity || 1,
       unitPrice: data.unitPrice,
       imageUrl: data.imageUrl,
     };
     setItems([dummyItem]);
-    setSubtotal(data.unitPrice);
+    setSubtotal(data.totalPrice || data.unitPrice);
   }, [router]);
 
   if (!orderData || items.length === 0) return <main className="min-h-screen bg-[#f8fddd]" />;
@@ -113,6 +116,17 @@ export default function QuizOrderSummaryPage() {
         <LandscapeBackdrop />
 
         <div className="relative z-10 w-full max-w-[657px] flex flex-col items-stretch gap-3">
+          {/* Back button */}
+          <div className="self-start">
+            <button
+              onClick={() => router.push('/quiz/menu-detail')}
+              className="w-10 h-10 flex items-center justify-center rounded-full bg-white/60 hover:bg-white transition shadow-sm backdrop-blur-md"
+              aria-label="Back"
+            >
+              <img src="/quiz/ArrowBrown.svg" alt="Back" className="w-6 h-6" />
+            </button>
+          </div>
+
           <div className="bg-white rounded-[20px] shadow-[0_0_10px_rgba(0,0,0,0.25)] p-6 md:p-7 flex flex-col gap-4">
             <OrderHeader />
 

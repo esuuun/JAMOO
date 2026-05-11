@@ -16,7 +16,10 @@ interface QuizOrderData {
   sweetnessRaw: SweetnessLevel;
   sweetnessBag: string;
   unitPrice: number;
+  totalPrice: number;
+  quantity: number;
   imageUrl: string;
+  size: 'REGULAR' | 'LARGE';
   description?: string; // Optional if we passed it
 }
 
@@ -48,11 +51,13 @@ export default function QuizMenuDetailPage() {
 
   function handlePlaceOrder() {
     if (!orderData) return;
-    const updatedData = {
+    const updatedData: QuizOrderData = {
       ...orderData,
       size,
       sweetnessBag: sweetness,
       unitPrice,
+      totalPrice,
+      quantity,
     };
     sessionStorage.setItem('jamoo_quiz_order', JSON.stringify(updatedData));
     router.push('/quiz/order-summary');
@@ -67,11 +72,14 @@ export default function QuizMenuDetailPage() {
         {/* Back button */}
         <div className="absolute top-4 left-4 z-20">
           <button
-            onClick={() => router.back()}
-            className="w-10 h-10 flex items-center justify-center rounded-full bg-white/50 hover:bg-white/80 transition shadow-sm backdrop-blur-md"
+            onClick={() => {
+              sessionStorage.setItem('jamoo_quiz_restore', '1');
+              router.push('/quiz');
+            }}
+            className="w-10 h-10 flex items-center justify-center rounded-full bg-white/60 hover:bg-white transition shadow-sm backdrop-blur-md"
             aria-label="Back"
           >
-            <img src="/quiz/Arrow.svg" alt="Back" className="w-6 h-6 opacity-80" />
+            <img src="/quiz/ArrowBrown.svg" alt="Back" className="w-6 h-6" />
           </button>
         </div>
 
@@ -97,7 +105,7 @@ export default function QuizMenuDetailPage() {
             {orderData.name}
           </h2>
           <p className="mt-2 text-[14px] text-[#523921] leading-relaxed">
-            {orderData.description || 'A warm blend of selected ginger, robust black tea, and smooth milk that comes together harmoniously'}
+            {orderData.description}
           </p>
 
           {/* Size Options */}
@@ -128,7 +136,8 @@ export default function QuizMenuDetailPage() {
                   key={s}
                   label={s}
                   active={sweetness === s}
-                  onClick={() => setSweetness(s)}
+                  disabled={true}
+                  onClick={() => {}}
                 />
               ))}
             </div>
@@ -166,14 +175,7 @@ export default function QuizMenuDetailPage() {
             <button
               type="button"
               onClick={handlePlaceOrder}
-              className="flex-1 h-[46px] bg-[#e6ecf2] border border-[#9aafbb] rounded-[8px] text-[#523921] font-bold text-[14px] leading-none transition hover:bg-white"
-            >
-              ADD TO BAG
-            </button>
-            <button
-              type="button"
-              onClick={handlePlaceOrder}
-              className="flex-1 h-[46px] bg-[#496f18] rounded-[8px] text-white font-bold text-[14px] leading-none transition hover:brightness-110 shadow-md"
+              className="w-full h-[46px] bg-[#496f18] rounded-[8px] text-white font-bold text-[14px] leading-none transition hover:brightness-110 shadow-md"
             >
               PLACE ORDER
             </button>
@@ -206,16 +208,17 @@ function SizeOption({ label, price, active, onClick }: { label: string; price: s
   );
 }
 
-function Chip({ label, active, onClick }: { label: string; active: boolean; onClick: () => void; }) {
+function Chip({ label, active, disabled, onClick }: { label: string; active: boolean; disabled?: boolean; onClick: () => void; }) {
   return (
     <button
       type="button"
-      onClick={onClick}
+      disabled={disabled}
+      onClick={disabled ? undefined : onClick}
       className={
         'h-[36px] px-4 rounded-[6px] text-[13px] font-bold text-[#523921] leading-none transition ' +
         (active
-          ? 'bg-[#d4e2c0] border-2 border-[#c9d19b]'
-          : 'bg-[#e6ecf2] border-2 border-transparent hover:brightness-95')
+          ? 'bg-[#d4e2c0] border-2 border-[#c9d19b] ' + (disabled ? 'cursor-default' : '')
+          : 'bg-[#e6ecf2] border-2 border-transparent ' + (disabled ? 'opacity-60 cursor-not-allowed' : 'hover:brightness-95'))
       }
     >
       {label}
